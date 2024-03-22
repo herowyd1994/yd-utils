@@ -1,0 +1,20 @@
+{
+    "name": "@yd/utils",
+    "version": "1.0.0",
+    "description": "## yd工具库",
+    "main": "index.js",
+    "target": "2017",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitee.com:herowyd1994/yd-utils.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.11.30",
+        "prettier": "^3.2.5"
+    }
+}

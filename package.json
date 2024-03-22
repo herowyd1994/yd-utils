@@ -10,7 +10,7 @@
         "type": "git",
         "url": "git@gitee.com:herowyd1994/yd-utils.git"
     },
-    "author": "",
+    "author": "~Wyd丶",
     "license": "ISC",
     "devDependencies": {
         "@types/node": "^20.11.30",

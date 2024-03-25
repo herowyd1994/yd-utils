@@ -224,11 +224,11 @@ export const toBoundary = (target: string | number, digits: number = 2) => {
     return target > boundary ? `${boundary}+` : String(target);
 };
 /**
- * 折扣
+ * 计算折扣
  * @param {number} t1
  * @param {number} t2
  * @param {string} unit
  * @returns {string}
  */
 export const toDiscount = (t1: number, t2: number, unit: string = '折') =>
-    `${toFixed((t1 / t2) * 10, 1).replace('.0', '')}${unit}`;
+    `${toFixed((t1 / t2) * 10, 1).replace(/\.0$/, '')}${unit}`;

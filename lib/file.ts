@@ -62,7 +62,7 @@ export const transformFileType = (blob: Blob, type: 'arrayBuffer' | 'binary' | '
  */
 export const urlToBase64 = async (url: string, config?: RequestInit) => {
     const blob = await fetch(url, config).then((res) => res.blob());
-    return await transformFileType(blob, 'base64');
+    return transformFileType(blob, 'base64');
 };
 /**
  * base64转文件

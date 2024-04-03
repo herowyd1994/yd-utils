@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://gitee.com/herowyd1994/yd-utils.git"
+        "url": "git@github.com:herowyd1994/yd-utils.git"
     },
     "author": "~Wyd丶",
     "license": "ISC",

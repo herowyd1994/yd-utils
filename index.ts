@@ -1,5 +1,6 @@
 /** @format */
 
+export * from './lib/emitter';
 export * from './lib/event';
 export * from './lib/file';
 export * as ali from './cloud/ali';

@@ -21,6 +21,14 @@ export function resizeImage(url: any, type: any, size?: any): string {
     return `${url}${type !== 'l' ? 'm_fill,' : ''}${type}_${size}`;
 }
 /**
+ * 图片瘦身
+ * @param {string} url
+ * @param {number | [number, number]} size
+ * @returns {string}
+ */
+export const imageslim = (url: string, size: number | [number, number]) =>
+    `${resizeImage(url, size)}/imageslim`;
+/**
  * 获取图片信息
  * @param {string} url
  * @returns {string}
@@ -34,18 +42,3 @@ export const imageInfo = (url: string) => `${url}?x-image-process=image/info`;
  */
 export const formatImage = (url: string, format: 'jpg' | 'png' | 'webp' | 'bmp' = 'png') =>
     `${url}?x-image-process=image/format,${format}`;
-/**
- * 质量变换
- * @param {string} url
- * @param {number} size
- * @param {number} quality
- * @returns {string}
- */
-export const qualityImage = (
-    url: string,
-    size: number | [number, number],
-    quality: number = 85
-) => {
-    const [w, h] = Array.isArray(size) ? size : [size, size];
-    return `${url}?x-image-process=image/resize,w_${w},h_${h}/quality,q_${quality}`;
-};

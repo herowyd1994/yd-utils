@@ -21,16 +21,6 @@ export function resizeImage(url: any, type: any, size?: any): string {
     return `${url}${type !== 'l' ? 'm_fill,' : ''}${type}_${size}`;
 }
 /**
- * 质量变换
- * @param {string} url
- * @param {"w" | "h"} type
- * @param {number} size
- * @param {number} quality
- * @returns {string}
- */
-export const qualityImage = (url: string, type: 'w' | 'h', size: number, quality: number = 85) =>
-    `${url}?x-oss-process=image/resize,${type}_${size}/quality,q_${quality}`;
-/**
  * 格式转换
  * @param {string} url
  * @param {"jpg" | "png" | "webp" | "bmp" | "gif" | "tiff"} format

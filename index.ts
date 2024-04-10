@@ -2,8 +2,8 @@
 
 export * from './lib/event';
 export * from './lib/file';
-export { default as ali } from './cloud/ali';
-export { default as huawei } from './cloud/huawei';
+export * as ali from './cloud/ali';
+export * as huawei from './cloud/huawei';
 /**
  * 睡眠
  * @param {number} delay

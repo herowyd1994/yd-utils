@@ -10,9 +10,9 @@
  * @param {number} size
  * @returns {string}
  */
-function resizeImage(url: string, size: number | [number, number]): string;
-function resizeImage(url: string, type: 'w' | 'h' | 'l', size: number): string;
-function resizeImage(url: any, type: any, size?: any): string {
+export function resizeImage(url: string, size: number | [number, number]): string;
+export function resizeImage(url: string, type: 'w' | 'h' | 'l', size: number): string;
+export function resizeImage(url: any, type: any, size?: any): string {
     url = `${url}?x-oss-process=image/resize,`;
     if (typeof type !== 'string') {
         const [w, h] = Array.isArray(size) ? size : [size, size];
@@ -28,7 +28,7 @@ function resizeImage(url: any, type: any, size?: any): string {
  * @param {number} quality
  * @returns {string}
  */
-const qualityImage = (url: string, type: 'w' | 'h', size: number, quality: number = 85) =>
+export const qualityImage = (url: string, type: 'w' | 'h', size: number, quality: number = 85) =>
     `${url}?x-oss-process=image/resize,${type}_${size}/quality,q_${quality}`;
 /**
  * 格式转换
@@ -36,7 +36,7 @@ const qualityImage = (url: string, type: 'w' | 'h', size: number, quality: numbe
  * @param {"jpg" | "png" | "webp" | "bmp" | "gif" | "tiff"} format
  * @returns {string}
  */
-const formatImage = (
+export const formatImage = (
     url: string,
     format: 'jpg' | 'png' | 'webp' | 'bmp' | 'gif' | 'tiff' = 'png'
 ) => `${url}?x-oss-process=image/format,${format}`;
@@ -45,7 +45,7 @@ const formatImage = (
  * @param {string} url
  * @returns {string}
  */
-const imageInfo = (url: string) => `${url}?x-oss-process=image/info`;
+export const imageInfo = (url: string) => `${url}?x-oss-process=image/info`;
 /**
  * https://help.aliyun.com/zh/oss/user-guide/video-transcoding?spm=a2c4g.11186623.0.0.49502611rraFfY
  * 视频转码
@@ -55,7 +55,7 @@ const imageInfo = (url: string) => `${url}?x-oss-process=image/info`;
  * @param {"mp4" | "mkv" | "mov" | "asf" | "avi" | "mxf" | "ts" | "flv"} format
  * @returns {string}
  */
-const convertVideo = (
+export const convertVideo = (
     url: string,
     start: number = 0,
     time: number = 60,
@@ -69,7 +69,7 @@ const convertVideo = (
  * @param {"jpg" | "png"} format
  * @returns {string}
  */
-const snapshotsVideo = (
+export const snapshotsVideo = (
     url: string,
     size: number | [number, number],
     start: number = 0,
@@ -83,14 +83,4 @@ const snapshotsVideo = (
  * @param {string} url
  * @returns {string}
  */
-const videoInfo = (url: string) => `${url}?x-oss-process=video/info`;
-
-export default {
-    resizeImage,
-    imageInfo,
-    qualityImage,
-    formatImage,
-    convertVideo,
-    snapshotsVideo,
-    videoInfo
-};
+export const videoInfo = (url: string) => `${url}?x-oss-process=video/info`;

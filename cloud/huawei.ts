@@ -10,9 +10,9 @@
  * @param {number} size
  * @returns {string}
  */
-function resizeImage(url: string, size: number | [number, number]): string;
-function resizeImage(url: string, type: 'w' | 'h' | 'l', size: number): string;
-function resizeImage(url: any, type: any, size?: any): string {
+export function resizeImage(url: string, size: number | [number, number]): string;
+export function resizeImage(url: string, type: 'w' | 'h' | 'l', size: number): string;
+export function resizeImage(url: any, type: any, size?: any): string {
     url = `${url}?x-image-process=image/resize,`;
     if (typeof type !== 'string') {
         const [w, h] = Array.isArray(size) ? size : [size, size];
@@ -25,14 +25,14 @@ function resizeImage(url: any, type: any, size?: any): string {
  * @param {string} url
  * @returns {string}
  */
-const imageInfo = (url: string) => `${url}?x-image-process=image/info`;
+export const imageInfo = (url: string) => `${url}?x-image-process=image/info`;
 /**
  * 格式转换
  * @param {string} url
  * @param {"jpg" | "png" | "webp" | "bmp"} format
  * @returns {string}
  */
-const formatImage = (url: string, format: 'jpg' | 'png' | 'webp' | 'bmp' = 'png') =>
+export const formatImage = (url: string, format: 'jpg' | 'png' | 'webp' | 'bmp' = 'png') =>
     `${url}?x-image-process=image/format,${format}`;
 /**
  * 质量变换
@@ -41,14 +41,11 @@ const formatImage = (url: string, format: 'jpg' | 'png' | 'webp' | 'bmp' = 'png'
  * @param {number} quality
  * @returns {string}
  */
-const qualityImage = (url: string, size: number | [number, number], quality: number = 85) => {
+export const qualityImage = (
+    url: string,
+    size: number | [number, number],
+    quality: number = 85
+) => {
     const [w, h] = Array.isArray(size) ? size : [size, size];
     return `${url}?x-image-process=image/resize,w_${w},h_${h}/quality,q_${quality}`;
-};
-
-export default {
-    resizeImage,
-    imageInfo,
-    qualityImage,
-    formatImage
 };

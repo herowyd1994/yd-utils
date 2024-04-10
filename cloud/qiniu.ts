@@ -5,25 +5,25 @@
  * 图片缩略 + 渐进显示 + 格式转换
  * @param {string} url
  * @param {number | [number, number]} size
- * @param {'jpg' | 'png' | 'webp' | 'gif'} format
+ * @param {'jpg' | 'gif' | 'png' | 'webp'} format
  * @returns {string}
  *
  * @param {string} url
  * @param {"w" | "h" } type
  * @param {number} size
- * @param {'jpg' | 'png' | 'webp' | 'gif'} format
+ * @param {'jpg' | 'gif' | 'png' | 'webp'} format
  * @returns {string}
  */
 export function imageView2(
     url: string,
     size: number | [number, number],
-    format?: 'jpg' | 'png' | 'webp' | 'gif'
+    format?: 'jpg' | 'gif' | 'png' | 'webp'
 ): string;
 export function imageView2(
     url: string,
     type: 'w' | 'h',
     size: number,
-    format?: 'jpg' | 'png' | 'webp' | 'gif'
+    format?: 'jpg' | 'gif' | 'png' | 'webp'
 ): string;
 export function imageView2(url: any, type: any, size?: any, format?: any): string {
     url = `${url}?imageView2/`;

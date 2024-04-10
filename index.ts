@@ -4,6 +4,8 @@ export * from './lib/event';
 export * from './lib/file';
 export * as ali from './cloud/ali';
 export * as huawei from './cloud/huawei';
+export * as qiniu from './cloud/qiniu';
+export * as tencent from './cloud/tencent';
 /**
  * 睡眠
  * @param {number} delay

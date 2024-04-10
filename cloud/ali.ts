@@ -5,7 +5,9 @@
  * 图片缩略
  * @param {string} url
  * @param {number | [number, number]} size
+ * @returns {string}
  *
+ * @param {string} url
  * @param {"w" | "h" | "l"} type
  * @param {number} size
  * @returns {string}

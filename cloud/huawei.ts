@@ -1,27 +1,19 @@
 /** @format */
 
+import { ResizeImageOpts } from '../types';
+
 /**
  * https://support.huaweicloud.com/fg-obs/obs_01_0430.html
  * 图片缩略
  * @param {string} url
+ * @param {"w" | "h" | "*"} type
  * @param {number | [number, number]} size
  * @returns {string}
- *
- * @param {string} url
- * @param {"w" | "h" | "l"} type
- * @param {number} size
- * @returns {string}
  */
-export function resizeImage(url: string, size: number | [number, number]): string;
-export function resizeImage(url: string, type: 'w' | 'h' | 'l', size: number): string;
-export function resizeImage(url: any, type: any, size?: any): string {
-    url = `${url}?x-image-process=image/resize,`;
-    if (typeof type !== 'string') {
-        const [w, h] = Array.isArray(size) ? size : [size, size];
-        return `${url}m_lfit,w_${w},h_${h}`;
-    }
-    return `${url}${type !== 'l' ? 'm_lfit,' : ''}${type}_${size}`;
-}
+const resizeImage = ({ url, type = '*', size }: ResizeImageOpts) => {
+    const [w, h] = Array.isArray(size) ? size : [size, size];
+    return `${url}?x-image-process=image/resize,m_lfit,${type !== '*' ? `${type}_${w}` : `w_${w},h_${h}`}`;
+};
 /**
  * 格式转换
  * @param {string} url

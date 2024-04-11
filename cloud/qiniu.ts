@@ -1,40 +1,21 @@
 /** @format */
 
+import { ImageView2Opts } from '../types';
+
 /**
  * https://developer.qiniu.com/dora/1279/basic-processing-images-imageview2
  * 图片缩略 + 渐进显示 + 格式转换
  * @param {string} url
+ * @param {"w" | "h" | "*"} type
  * @param {number | [number, number]} size
- * @param {'jpg' | 'gif' | 'png' | 'webp'} format
- * @returns {string}
- *
- * @param {string} url
- * @param {"w" | "h" } type
- * @param {number} size
- * @param {'jpg' | 'gif' | 'png' | 'webp'} format
+ * @param {"jpg" | "gif" | "png" | "webp"} format
+ * @param {boolean} interlace
  * @returns {string}
  */
-export function imageView2(
-    url: string,
-    size: number | [number, number],
-    format?: 'jpg' | 'gif' | 'png' | 'webp'
-): string;
-export function imageView2(
-    url: string,
-    type: 'w' | 'h',
-    size: number,
-    format?: 'jpg' | 'gif' | 'png' | 'webp'
-): string;
-export function imageView2(url: any, type: any, size?: any, format?: any): string {
-    url = `${url}?imageView2/`;
-    if (typeof type !== 'string') {
-        const [w, h] = Array.isArray(size) ? size : [size, size];
-        url = `${url}1/w/${w}/h/${h}`;
-    } else {
-        url = `${url}2/${type}/${size}`;
-    }
-    return `${url}/interlace/1${format ? `/format/${format}` : ''}`;
-}
+const imageView2 = ({ url, type = '*', size, format, interlace = true }: ImageView2Opts) => {
+    const [w, h] = Array.isArray(size) ? size : [size, size];
+    return `${url}?imageView2/${type !== '*' ? `2/${type}/${w}` : `1/w/${w}/h/${h}`}${!format ? '' : `/format/${format}`}/interlace/${Number(interlace)}`;
+};
 /**
  * 图片基本信息
  * @param {string} url

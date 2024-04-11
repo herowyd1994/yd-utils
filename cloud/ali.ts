@@ -1,27 +1,19 @@
 /** @format */
 
+import { ResizeImageOpts } from '../types';
+
 /**
  * https://help.aliyun.com/zh/oss/user-guide/resize-images-4?spm=a2c4g.11186623.0.0.78da24e7ZFMgEr#b248f7f074dc1
  * 图片缩略
  * @param {string} url
+ * @param {"w" | "h" | "*"} type
  * @param {number | [number, number]} size
  * @returns {string}
- *
- * @param {string} url
- * @param {"w" | "h" | "l"} type
- * @param {number} size
- * @returns {string}
  */
-export function resizeImage(url: string, size: number | [number, number]): string;
-export function resizeImage(url: string, type: 'w' | 'h' | 'l', size: number): string;
-export function resizeImage(url: any, type: any, size?: any): string {
-    url = `${url}?x-oss-process=image/resize,`;
-    if (typeof type !== 'string') {
-        const [w, h] = Array.isArray(size) ? size : [size, size];
-        return `${url}m_fill,w_${w},h_${h}`;
-    }
-    return `${url}${type !== 'l' ? 'm_fill,' : ''}${type}_${size}`;
-}
+const resizeImage = ({ url, type = '*', size }: ResizeImageOpts) => {
+    const [w, h] = Array.isArray(size) ? size : [size, size];
+    return `${url}?x-oss-process=image/resize,m_fill,${type !== '*' ? `${type}_${w}` : `w_${w},h_${h}`}`;
+};
 /**
  * 格式转换
  * @param {string} url

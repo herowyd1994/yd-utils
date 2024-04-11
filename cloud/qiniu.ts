@@ -12,7 +12,7 @@ import { ImageView2Opts } from '../types';
  * @param {boolean} interlace
  * @returns {string}
  */
-const imageView2 = ({ url, type = '*', size, format, interlace = true }: ImageView2Opts) => {
+export const imageView2 = ({ url, type = '*', size, format, interlace = true }: ImageView2Opts) => {
     const [w, h] = Array.isArray(size) ? size : [size, size];
     return `${url}?imageView2/${type !== '*' ? `2/${type}/${w}` : `1/w/${w}/h/${h}`}${!format ? '' : `/format/${format}`}/interlace/${Number(interlace)}`;
 };

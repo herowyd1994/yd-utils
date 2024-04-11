@@ -10,7 +10,7 @@ import { ResizeImageOpts } from '../types';
  * @param {number | [number, number]} size
  * @returns {string}
  */
-const resizeImage = ({ url, type = '*', size }: ResizeImageOpts) => {
+export const resizeImage = ({ url, type = '*', size }: ResizeImageOpts) => {
     const [w, h] = Array.isArray(size) ? size : [size, size];
     return `${url}?x-image-process=image/resize,m_lfit,${type !== '*' ? `${type}_${w}` : `w_${w},h_${h}`}`;
 };

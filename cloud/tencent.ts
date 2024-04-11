@@ -12,7 +12,7 @@ import { ImageMogr2Opts } from '../types';
  * @param {boolean} interlace
  * @returns {string}
  */
-const imageMogr2 = ({ url, type = '*', size, format, interlace = true }: ImageMogr2Opts) => {
+export const imageMogr2 = ({ url, type = '*', size, format, interlace = true }: ImageMogr2Opts) => {
     const [w, h] = Array.isArray(size) ? size : [size, size];
     return `${url}?imageMogr2/thumbnail/${
         type === 'w' ? `${w}x`

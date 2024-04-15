@@ -258,3 +258,11 @@ export const toBoundary = (target: string | number, digits: number = 2) => {
  */
 export const toDiscount = (t1: number, t2: number, unit: string = '折') =>
     `${toFixed((t1 / t2) * 10, 1).replace(/\.0$/, '')}${unit}`;
+/**
+ * 金额千分位
+ * @param {string | number} target
+ * @param {string} symbol
+ * @returns {string}
+ */
+export const toMillennials = (target: string | number, symbol: string = ',') =>
+    String(target).replace(/\B(?=(?:\d{3})+$)/g, symbol);

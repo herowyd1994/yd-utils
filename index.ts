@@ -51,10 +51,25 @@ export const transformUrlParams = (params: Record<string, any>, symbol: string =
     Object.entries(filterNone(params))
         .reduce(
             (str, [key, value]) =>
-                str + `${key}=${typeof value === 'object' ? JSON.stringify(value) : value}&`,
+                `${str}${
+                    Array.isArray(value) ?
+                        joinArrayUrlParams(value, key)
+                    :   `${key}=${typeof value === 'object' ? JSON.stringify(value) : value}&`
+                }`,
             symbol
         )
         .slice(0, -1);
+/**
+ * 拼接数组url参数
+ * @param {any[]} params
+ * @param {string} key
+ * @returns {any}
+ */
+const joinArrayUrlParams = (params: any[], key: string) =>
+    params.reduce(
+        (str, item) => `${str}${key}=${typeof item === 'object' ? JSON.stringify(item) : item}&`,
+        ''
+    );
 /**
  * 序列化Url参数
  * @param {string} url
@@ -66,7 +81,13 @@ export const serializeUrlParams = (url: string, symbol: string = '?') =>
         .split('&')
         .reduce((obj, arr) => {
             const [key, value] = arr.split('=');
-            return { ...obj, [key]: value };
+            if (obj[key]) {
+                !Array.isArray(obj[key]) && (obj[key] = [obj[key]]);
+                obj[key].push(value);
+            } else {
+                obj[key] = value;
+            }
+            return obj;
         }, {});
 /**
  * 过滤空值
@@ -74,9 +95,9 @@ export const serializeUrlParams = (url: string, symbol: string = '?') =>
  * @param {any[]} filter
  * @returns {any}
  */
-export const filterNone = (target: any, filter: any[] = ['/', '-']) => {
-    if (typeof target !== 'object' || target == null) {
-        return filter.includes(target) ? null : target;
+export const filterNone = (target: any, filter: any[] = ['/', '-', '.']) => {
+    if (typeof target !== 'object') {
+        return isNone(target) || filter.includes(target) ? null : target;
     }
     return Object.entries(target).reduce(
         (obj, [key, value]) => {

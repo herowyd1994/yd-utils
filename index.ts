@@ -47,8 +47,12 @@ export const deepClone = (
  * @param {string} symbol
  * @returns {string}
  */
-export const transformUrlParams = (params: Record<string, any>, symbol: string = '?') =>
-    Object.entries(filterNone(params))
+export const transformUrlParams = (params: Record<string, any>, symbol: string = '?') => {
+    const res = filterNone(params);
+    if (isNone(res)) {
+        return symbol;
+    }
+    return Object.entries(res)
         .reduce(
             (str, [key, value]) =>
                 `${str}${
@@ -59,6 +63,7 @@ export const transformUrlParams = (params: Record<string, any>, symbol: string =
             symbol
         )
         .slice(0, -1);
+};
 /**
  * 拼接数组url参数
  * @param {any[]} params
@@ -97,7 +102,7 @@ export const serializeUrlParams = (url: string, symbol: string = '?') =>
  */
 export const filterNone = (target: any, filter: any[] = ['/', '-', '.']) => {
     if (typeof target !== 'object' || target == undefined) {
-        return isNone(target) || filter.includes(target) ? null : target;
+        return filter.includes(target) ? null : target;
     }
     return Object.entries(target).reduce(
         (obj, [key, value]) => {

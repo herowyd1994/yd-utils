@@ -1,12 +1,7 @@
 /** @format */
 
-export * from './lib/emitter';
-export * from './lib/event';
-export * from './lib/file';
-export * as ali from './cloud/ali';
-export * as huawei from './cloud/huawei';
-export * as qiniu from './cloud/qiniu';
-export * as tencent from './cloud/tencent';
+export * from './lib';
+export * from './cloud';
 /**
  * 睡眠
  * @param {number} delay
@@ -84,16 +79,19 @@ export const serializeUrlParams = (url: string, symbol: string = '?') =>
     url
         .slice(url.indexOf(symbol) + 1)
         .split('&')
-        .reduce((obj, arr) => {
-            const [key, value] = arr.split('=');
-            if (obj[key]) {
-                !Array.isArray(obj[key]) && (obj[key] = [obj[key]]);
-                obj[key].push(value);
-            } else {
-                obj[key] = value;
-            }
-            return obj;
-        }, {});
+        .reduce(
+            (obj, arr) => {
+                const [key, value] = arr.split('=');
+                if (obj[key]) {
+                    !Array.isArray(obj[key]) && (obj[key] = [obj[key]]);
+                    obj[key].push(value);
+                } else {
+                    obj[key] = value;
+                }
+                return obj;
+            },
+            {} as Record<string, any>
+        );
 /**
  * 过滤空值
  * @param target
@@ -125,7 +123,6 @@ export const isNone = (target: any) =>
     target === '{}' ||
     typeof target === 'function' ||
     (typeof target === 'object' && !Object.keys(target).length);
-
 /**
  * 获取北京时间
  * @returns {Date}
@@ -145,14 +142,6 @@ export const getBJTime = () => {
     return cTime;
 };
 /**
- * 添加前缀
- * @param {number | string} target
- * @param {number} fix
- * @returns {string}
- */
-export const preFix = (target: number | string, fix = 0) =>
-    parseFloat(`${target}`) < 10 ? `${fix}${target}` : `${target}`;
-/**
  * 转换倒计时格式
  * @param {number} time
  * @param {string} symbol
@@ -169,6 +158,14 @@ export const transformCountDown = (time: number, symbol: string = ':') => {
     }
     return `${preFix(h)}${symbol}${preFix(m)}${symbol}${preFix(s)}`;
 };
+/**
+ * 添加前缀
+ * @param {number | string} target
+ * @param {number} fix
+ * @returns {string}
+ */
+export const preFix = (target: number | string, fix = 0) =>
+    parseFloat(`${target}`) < 10 ? `${fix}${target}` : `${target}`;
 /**
  * 16进制转rgba
  * @param {string} color

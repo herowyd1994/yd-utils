@@ -9,7 +9,7 @@ import { EmitterHandler } from '../types';
  * @returns {() => EmitterHandler[]}
  */
 export const on = (key: string, handler: EmitterHandler) => {
-    onInit(key, handler);
+    init(key, handler);
     return () => (store[key] = store[key].filter((fn) => fn !== handler));
 };
 /**
@@ -18,26 +18,26 @@ export const on = (key: string, handler: EmitterHandler) => {
  * @param {EmitterHandler} handler
  */
 export const once = (key: string, handler: EmitterHandler) => {
-    onInit(key, handler);
+    init(key, handler);
     handler.once = false;
 };
 /**
  * 解绑事件
  * @param {string | string[] | "*"} keys
  */
-export const off = (keys: string | string[] | '*') => onEach(keys, (key) => delete store[key]);
+export const off = (keys: string | string[] | '*') => each(keys, (key) => delete store[key]);
 /**
  * 触发事件
  * @param {string | string[] | "*"} keys
  */
 export const emit = (keys: string | string[] | '*') =>
-    onEach(keys, (key) => {
+    each(keys, (key) => {
         if (!store[key]) {
             return;
         }
         store[key].forEach((fn) => {
-            fn.hasOwnProperty('once') && (fn.once = true);
             fn();
+            fn.hasOwnProperty('once') && (fn.once = true);
         });
         store[key] = store[key].filter((fn) => fn.once !== true);
     });
@@ -49,11 +49,11 @@ export const emit = (keys: string | string[] | '*') =>
 export const count = (key: string) => (store[key] ? store[key].length : 0);
 
 const store: Record<string, EmitterHandler[]> = {};
-const onInit = (key: string, handler: EmitterHandler) => {
+const init = (key: string, handler: EmitterHandler) => {
     !store[key] && (store[key] = []);
     store[key].push(handler);
 };
-const onEach = (keys: string | string[] | '*', handler: (key: string) => void) => {
+const each = (keys: string | string[] | '*', handler: (key: string) => void) => {
     keys =
         keys === '*' ? Object.keys(store)
         : typeof keys === 'string' ? [keys]

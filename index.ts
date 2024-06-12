@@ -19,8 +19,8 @@ export const deepClone = (
     deps: WeakMap<Record<string, any>, Record<string, any>> = new WeakMap()
 ) => {
     if (
+        !target ||
         typeof target !== 'object' ||
-        target === null ||
         target instanceof RegExp ||
         target instanceof Date
     ) {

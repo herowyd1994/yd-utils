@@ -10,7 +10,7 @@ import { EmitterHandler } from '../types';
  */
 export const on = (key: string, handler: EmitterHandler) => {
     init(key, handler);
-    return () => (store[key] = store[key].filter((fn) => fn !== handler));
+    return () => (store[key] = store[key].filter(fn => fn !== handler));
 };
 /**
  * 绑定一次性事件
@@ -25,21 +25,21 @@ export const once = (key: string, handler: EmitterHandler) => {
  * 解绑事件
  * @param {string | string[] | "*"} keys
  */
-export const off = (keys: string | string[] | '*') => each(keys, (key) => delete store[key]);
+export const off = (keys: string | string[] | '*') => each(keys, key => delete store[key]);
 /**
  * 触发事件
  * @param {string | string[] | "*"} keys
  */
 export const emit = (keys: string | string[] | '*') =>
-    each(keys, (key) => {
+    each(keys, key => {
         if (!store[key]) {
             return;
         }
-        store[key].forEach((fn) => {
+        store[key].forEach(fn => {
             fn();
             fn.hasOwnProperty('once') && (fn.once = true);
         });
-        store[key] = store[key].filter((fn) => fn.once !== true);
+        store[key] = store[key].filter(fn => fn.once !== true);
     });
 /**
  * 获取当前key绑定事件的数量

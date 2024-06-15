@@ -9,7 +9,7 @@
  * @returns {Promise<void>}
  */
 export const downloadFile = async (url: string, fileName: string, config?: RequestInit) => {
-    const blob = await fetch(url, config).then((res) => res.blob());
+    const blob = await fetch(url, config).then(res => res.blob());
     const href = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = href;
@@ -24,7 +24,7 @@ export const downloadFile = async (url: string, fileName: string, config?: Reque
  * @returns {Promise<FileList>}
  */
 export const selectFile = (type: 'single' | 'multiple' = 'single', accept: string = '*') =>
-    new Promise<FileList>((resolve) => {
+    new Promise<FileList>(resolve => {
         const input = document.createElement('input');
         input.accept = accept;
         input.type = 'file';
@@ -39,7 +39,7 @@ export const selectFile = (type: 'single' | 'multiple' = 'single', accept: strin
  * @returns {Promise<string | ArrayBuffer | null>}
  */
 export const transformFileType = (blob: Blob, type: 'arrayBuffer' | 'binary' | 'base64') =>
-    new Promise<string | ArrayBuffer | null>((resolve) => {
+    new Promise<string | ArrayBuffer | null>(resolve => {
         const fr = new FileReader();
         switch (type) {
             case 'arrayBuffer':
@@ -61,7 +61,7 @@ export const transformFileType = (blob: Blob, type: 'arrayBuffer' | 'binary' | '
  * @returns {Promise<string | ArrayBuffer | null>}
  */
 export const urlToBase64 = async (url: string, config?: RequestInit) => {
-    const blob = await fetch(url, config).then((res) => res.blob());
+    const blob = await fetch(url, config).then(res => res.blob());
     return transformFileType(blob, 'base64');
 };
 /**

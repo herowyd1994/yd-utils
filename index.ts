@@ -7,7 +7,7 @@ export * from './cloud';
  * @param {number} delay
  * @returns {Promise<unknown>}
  */
-export const sleep = (delay: number = 0) => new Promise((resolve) => setTimeout(resolve, delay));
+export const sleep = (delay: number = 0) => new Promise(resolve => setTimeout(resolve, delay));
 /**
  * 深克隆
  * @param target

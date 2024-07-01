@@ -1,15 +1,27 @@
 /** @format */
 
+import { DownloadFileConfig } from '../types';
+
 /**
  * 下载文件
- * @format
  * @param {string} url
  * @param {string} fileName
- * @param {RequestInit} config
+ * @param {(error: any) => void} onError
+ * @param {Omit<DownloadFileConfig, "onError">} config
  * @returns {Promise<void>}
  */
-export const downloadFile = async (url: string, fileName: string, config?: RequestInit) => {
-    const blob = await fetch(url, config).then(res => res.blob());
+export const downloadFile = async (
+    url: string,
+    fileName: string,
+    { onError, ...config }: DownloadFileConfig = { onError: ({ message }) => alert(message) }
+) => {
+    const blob = await fetch(url, config).then(async res => {
+        if (res.status >= 400) {
+            onError(await res.json());
+            return Promise.reject();
+        }
+        return res.blob();
+    });
     const href = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = href;

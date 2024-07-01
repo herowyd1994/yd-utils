@@ -14,3 +14,6 @@ export interface ImageView2Opts extends ResizeImageOpts {
 export interface ImageMogr2Opts extends Omit<ImageView2Opts, 'format'> {
     format?: ImageView2Opts['format'] | 'bmp' | 'yjpeg';
 }
+export interface DownloadFileConfig extends RequestInit {
+    onError: (error: any) => void;
+}

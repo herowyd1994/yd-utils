@@ -20,10 +20,8 @@ export const resizeImage = ({ url, type = '*', size }: ResizeImageOpts) => {
  * @param {"jpg" | "png" | "webp" | "bmp" | "gif" | "tiff"} format
  * @returns {string}
  */
-export const formatImage = (
-    url: string,
-    format: 'jpg' | 'png' | 'webp' | 'bmp' | 'gif' | 'tiff' = 'png'
-) => `${url}?x-oss-process=image/format,${format}`;
+export const formatImage = (url: string, format: 'jpg' | 'png' | 'webp' | 'bmp' | 'gif' | 'tiff' = 'png') =>
+    `${url}?x-oss-process=image/format,${format}`;
 /**
  * 获取信息
  * @param {string} url

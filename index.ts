@@ -230,16 +230,13 @@ export const getDistance = (lat1: number, lng1: number, lat2: number, lng2: numb
  * 保留小数位
  * @param {string | number} target
  * @param {number} digits
+ * @param {string} unit
  * @returns {string}
  */
-export const toFixed = (target: string | number, digits: number = 2) => {
+export const toFixed = (target: string | number, digits: number = 2, unit: string = '￥') => {
     target = Number(target);
     target = isNaN(target) ? 0 : target;
-    return target.toFixed(
-        digits < 0 ? 0
-        : digits > 10 ? 10
-        : digits
-    );
+    return `${unit}${target.toFixed(digits)}`;
 };
 /**
  * 数值边界

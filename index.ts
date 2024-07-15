@@ -5,22 +5,9 @@ export * from './cloud';
 /**
  * 睡眠
  * @param {number} delay
- * @returns {Promise<() => void>}
+ * @returns {Promise<unknown>}
  */
-const timer = new Set<NodeJS.Timeout>();
-export const sleep = (delay: number = 0) =>
-    new Promise<() => void>(resolve =>
-        timer.add(
-            setTimeout(
-                () =>
-                    resolve(() => {
-                        timer.forEach(t => clearTimeout(t));
-                        timer.clear();
-                    }),
-                delay
-            )
-        )
-    );
+export const sleep = (delay: number = 0) => new Promise(resolve => setTimeout(resolve, delay));
 /**
  * 深克隆
  * @param target

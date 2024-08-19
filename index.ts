@@ -161,17 +161,13 @@ export const preFix = (target: number | string, fix = 0) =>
  * @param {number} opacity
  * @returns {string}
  */
-export const colorToRGBA = (color: string, opacity: number = 1) => {
-    color = color.slice(1);
-    if (color.length !== 6 && color.length === 3) {
-        color = color.split('').reduce((a, b) => a + b + b, '');
-    }
-    let str = '';
-    for (let i = 0; i < color.length; i += 2) {
-        str += `${parseInt(`${color[i]}${color[i + 1]}`, 16)},`;
-    }
-    return `rgba(${str}${opacity})`;
-};
+export const colorToRGBA = (color: string, opacity: number = 1) =>
+    `rgba(${color
+        .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) => `#${r}${r}${g}${g}${b}${b}`)
+        .substring(1)
+        .match(/.{2}/g)
+        .map(x => parseInt(x, 16))
+        .join(',')},${opacity})`;
 /**
  * 复制文字
  * @param {string} text
@@ -251,3 +247,25 @@ export const toDiscount = (t1: number, t2: number, unit: string = '折') =>
  */
 export const toMillennials = (target: string | number, symbol: string = ',') =>
     String(target).replace(/\B(?=(?:\d{3})+$)/g, symbol);
+/**
+ * 去除文本中去除HTML
+ * @param {string} html
+ * @returns {string}
+ */
+const stripHtml = (html: string) => new DOMParser().parseFromString(html, 'text/html').body.textContent || '';
+/**
+ * 字符串转对象
+ * @param {string} target
+ * @returns {any}
+ */
+const strParse = (target: string) =>
+    JSON.parse(target.replace(/(\w+)\s*:/g, (_, p1) => `"${p1}":`).replace(/\'/g, '"'));
+/**
+ * 获取cookie
+ * @returns {object}
+ */
+const getCookie = () =>
+    document.cookie
+        .split(';')
+        .map(item => item.split('='))
+        .reduce((acc, [k, v]) => (acc[k.trim().replace('"', '')] = v) && acc, {});

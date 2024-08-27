@@ -15,7 +15,14 @@ export const sleep = (delay: number = 0) => new Promise(resolve => setTimeout(re
  * @returns {any}
  */
 export const deepClone = (target: any, deps: WeakMap<Record<string, any>, Record<string, any>> = new WeakMap()) => {
-    if (!target || typeof target !== 'object' || target instanceof RegExp || target instanceof Date) {
+    if (
+        !target ||
+        typeof target !== 'object' ||
+        target instanceof RegExp ||
+        target instanceof Date ||
+        target instanceof Set ||
+        target instanceof Map
+    ) {
         return target;
     }
     if (deps.has(target)) {

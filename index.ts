@@ -172,7 +172,7 @@ export const colorToRGBA = (color: string, opacity: number = 1) =>
     `rgba(${color
         .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) => `#${r}${r}${g}${g}${b}${b}`)
         .substring(1)
-        .match(/.{2}/g)
+        .match(/.{2}/g)!
         .map(x => parseInt(x, 16))
         .join(',')},${opacity})`;
 /**
@@ -186,8 +186,7 @@ export const copyText = (text: string) => {
     const textarea = document.createElement('textarea');
     document.body.appendChild(textarea);
     textarea.style.position = 'fixed';
-    textarea.style.clip = 'rect(0 0 0 0)';
-    textarea.style.top = '10px';
+    textarea.style.opacity = '0';
     textarea.value = text;
     textarea.select();
     document.execCommand('copy', true);
@@ -259,19 +258,19 @@ export const toMillennials = (target: string | number, symbol: string = ',') =>
  * @param {string} html
  * @returns {string}
  */
-const stripHtml = (html: string) => new DOMParser().parseFromString(html, 'text/html').body.textContent || '';
+export const stripHtml = (html: string) => new DOMParser().parseFromString(html, 'text/html').body.textContent || '';
 /**
  * 字符串转对象
  * @param {string} target
  * @returns {any}
  */
-const strParse = (target: string) =>
+export const strParse = (target: string) =>
     JSON.parse(target.replace(/(\w+)\s*:/g, (_, p1) => `"${p1}":`).replace(/\'/g, '"'));
 /**
  * 获取cookie
  * @returns {object}
  */
-const getCookie = () =>
+export const getCookie = () =>
     document.cookie
         .split(';')
         .map(item => item.split('='))

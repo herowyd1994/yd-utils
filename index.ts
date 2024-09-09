@@ -14,7 +14,10 @@ export const sleep = (delay: number = 0) => new Promise(resolve => setTimeout(re
  * @param {WeakMap<Record<string, any>, Record<string, any>>} deps
  * @returns {any}
  */
-export const deepClone = (target: any, deps: WeakMap<Record<string, any>, Record<string, any>> = new WeakMap()) => {
+export const deepClone = (
+    target: any,
+    deps: WeakMap<Record<string, any>, Record<string, any>> = new WeakMap()
+) => {
     if (
         !target ||
         typeof target !== 'object' ||
@@ -65,7 +68,10 @@ export const transformUrlParams = (params: Record<string, any>, symbol: string =
  * @returns {any}
  */
 const joinArrayUrlParams = (params: any[], key: string) =>
-    params.reduce((str, item) => `${str}${key}=${typeof item === 'object' ? JSON.stringify(item) : item}&`, '');
+    params.reduce(
+        (str, item) => `${str}${key}=${typeof item === 'object' ? JSON.stringify(item) : item}&`,
+        ''
+    );
 /**
  * 序列化Url参数
  * @param {string} url
@@ -210,7 +216,10 @@ export const getDistance = (lat1: number, lng1: number, lat2: number, lng2: numb
         r *
         2 *
         Math.asin(
-            Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(rad1) * Math.cos(rad2) * Math.pow(Math.sin(b / 2), 2))
+            Math.sqrt(
+                Math.pow(Math.sin(a / 2), 2) +
+                    Math.cos(rad1) * Math.cos(rad2) * Math.pow(Math.sin(b / 2), 2)
+            )
         )
     );
 };
@@ -258,7 +267,8 @@ export const toMillennials = (target: string | number, symbol: string = ',') =>
  * @param {string} html
  * @returns {string}
  */
-export const stripHtml = (html: string) => new DOMParser().parseFromString(html, 'text/html').body.textContent || '';
+export const stripHtml = (html: string) =>
+    new DOMParser().parseFromString(html, 'text/html').body.textContent || '';
 /**
  * 字符串转对象
  * @param {string} target

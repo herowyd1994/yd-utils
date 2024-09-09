@@ -15,14 +15,15 @@ export const downloadFile = async (
     fileName: string,
     { onError, ...config }: DownloadFileConfig = { onError: ({ message }) => alert(message) }
 ) => {
-    const blob = await fetch(url, config).then(async res => {
-        if (res.status >= 400) {
-            onError(await res.json());
-            return Promise.reject();
-        }
-        return res.blob();
-    });
-    const href = URL.createObjectURL(blob);
+    const href = URL.createObjectURL(
+        await fetch(url, config).then(async res => {
+            if (res.status >= 400) {
+                onError(await res.json());
+                return Promise.reject();
+            }
+            return res.blob();
+        })
+    );
     const a = document.createElement('a');
     a.href = href;
     a.download = fileName;
@@ -69,13 +70,24 @@ export const transformFileType = (blob: Blob, type: 'arrayBuffer' | 'binary' | '
 /**
  * 网络图片转base64
  * @param {string} url
- * @param {RequestInit} config
+ * @param {(error: any) => void} onError
+ * @param {Omit<DownloadFileConfig, "onError">} config
  * @returns {Promise<string | ArrayBuffer | null>}
  */
-export const urlToBase64 = async (url: string, config?: RequestInit) => {
-    const blob = await fetch(url, config).then(res => res.blob());
-    return transformFileType(blob, 'base64');
-};
+export const urlToBase64 = async (
+    url: string,
+    { onError, ...config }: DownloadFileConfig = { onError: ({ message }) => alert(message) }
+) =>
+    transformFileType(
+        await fetch(url, config).then(async res => {
+            if (res.status >= 400) {
+                onError(await res.json());
+                return Promise.reject();
+            }
+            return res.blob();
+        }),
+        'base64'
+    );
 /**
  * base64转文件
  * @param {string} base64

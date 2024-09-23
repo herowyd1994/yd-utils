@@ -1,7 +1,7 @@
 /** @format */
 
-export type Handler<V = any> = (...args: any[]) => V;
-export type EmitterHandler = Handler & Partial<{ once: boolean }>;
+export type Handler<V> = (...args: any[]) => V;
+export type EmitterHandler = Handler<any> & Partial<{ once: boolean }>;
 export interface ResizeImageOpts {
     url: string;
     type: 'w' | 'h' | '*';

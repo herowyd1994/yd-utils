@@ -29,14 +29,15 @@ export const off = (keys: string | string[] | '*') => each(keys, key => delete s
 /**
  * 触发事件
  * @param {string | string[] | "*"} keys
+ * @param {any[]} args
  */
-export const emit = (keys: string | string[] | '*') =>
+export const emit = (keys: string | string[] | '*', ...args: any[]) =>
     each(keys, key => {
         if (!store[key]) {
             return;
         }
         store[key].forEach(fn => {
-            fn();
+            fn(...args);
             fn.hasOwnProperty('once') && (fn.once = true);
         });
         store[key] = store[key].filter(fn => fn.once !== true);

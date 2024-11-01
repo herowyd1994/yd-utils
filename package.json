@@ -1,10 +1,11 @@
 {
     "name": "@yd/utils",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "## yd工具库",
-    "main": "index.ts",
+    "main": "dist/index.js",
+    "types": "types/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "tsc"
     },
     "repository": {
         "type": "git",
@@ -13,7 +14,8 @@
     "author": "~Wyd丶",
     "license": "ISC",
     "devDependencies": {
-        "@types/node": "^20.11.30",
-        "prettier": "^3.2.5"
+        "@types/node": "^22.8.6",
+        "prettier": "^3.3.3",
+        "typescript": "^5.6.3"
     }
 }

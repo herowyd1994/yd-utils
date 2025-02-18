@@ -128,7 +128,7 @@ export const toBoundary = (target, digits = 2) => {
 export const toDiscount = (t1, t2, unit = '折') => `${toFixed((t1 / t2) * 10, 1).replace(/\.0$/, '')}${unit}`;
 export const toMillennials = (target, symbol = ',') => String(target).replace(/\B(?=(?:\d{3})+$)/g, symbol);
 export const stripHtml = (html) => new DOMParser().parseFromString(html, 'text/html').body.textContent || '';
-export const strParse = (target) => JSON.parse(target.replace(/(\w+)\s*:/g, (_, p1) => `"${p1}":`).replace(/\'/g, '"'));
+export const strParse = (target) => JSON.parse(target.replace(/(\w+)\s*:/g, (_, p1) => `"${p1}":`).replace(/'/g, '"'));
 export const getCookie = () => document.cookie
     .split(';')
     .map(item => item.split('='))

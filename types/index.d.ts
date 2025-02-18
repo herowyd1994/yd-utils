@@ -1,6 +1,7 @@
 export * from './lib';
 export * from './cloud';
 export declare const sleep: (delay?: number) => Promise<unknown>;
+export declare const getType: (target: any) => any;
 export declare const deepClone: (target: any, deps?: WeakMap<Record<string, any>, Record<string, any>>) => any;
 export declare const transformUrlParams: (params: Record<string, any>, symbol?: string) => string;
 export declare const serializeUrlParams: (url: string, symbol?: string) => Record<string, any>;

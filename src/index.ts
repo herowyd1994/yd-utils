@@ -9,6 +9,13 @@ export * from './cloud';
  */
 export const sleep = (delay: number = 0) => new Promise(resolve => setTimeout(resolve, delay));
 /**
+ * 获取数据类型
+ * @param target
+ * @returns {string}
+ */
+export const getType = (target: any) =>
+    Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
+/**
  * 深克隆
  * @param target
  * @param {WeakMap<Record<string, any>, Record<string, any>>} deps
@@ -18,14 +25,8 @@ export const deepClone = (
     target: any,
     deps: WeakMap<Record<string, any>, Record<string, any>> = new WeakMap()
 ) => {
-    if (
-        !target ||
-        typeof target !== 'object' ||
-        target instanceof RegExp ||
-        target instanceof Date ||
-        target instanceof Set ||
-        target instanceof Map
-    ) {
+    const type = getType(target);
+    if (type !== 'array' || type !== 'object') {
         return target;
     }
     if (deps.has(target)) {
@@ -275,7 +276,7 @@ export const stripHtml = (html: string) =>
  * @returns {any}
  */
 export const strParse = (target: string) =>
-    JSON.parse(target.replace(/(\w+)\s*:/g, (_, p1) => `"${p1}":`).replace(/\'/g, '"'));
+    JSON.parse(target.replace(/(\w+)\s*:/g, (_, p1) => `"${p1}":`).replace(/'/g, '"'));
 /**
  * 获取cookie
  * @returns {object}

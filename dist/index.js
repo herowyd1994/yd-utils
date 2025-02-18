@@ -1,13 +1,10 @@
 export * from './lib';
 export * from './cloud';
 export const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, delay));
+export const getType = (target) => Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
 export const deepClone = (target, deps = new WeakMap()) => {
-    if (!target ||
-        typeof target !== 'object' ||
-        target instanceof RegExp ||
-        target instanceof Date ||
-        target instanceof Set ||
-        target instanceof Map) {
+    const type = getType(target);
+    if (type !== 'array' || type !== 'object') {
         return target;
     }
     if (deps.has(target)) {

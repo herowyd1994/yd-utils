@@ -164,10 +164,10 @@ export const transformCountDown = (time: number, symbol: string = ':') => {
 /**
  * 添加前缀
  * @param {number | string} target
- * @param {number} fix
+ * @param {number | string} fix
  * @returns {string}
  */
-export const preFix = (target: number | string, fix = 0) =>
+export const preFix = (target: number | string, fix: number | string = 0) =>
     parseFloat(`${target}`) < 10 ? `${fix}${target}` : `${target}`;
 /**
  * 16进制转rgba

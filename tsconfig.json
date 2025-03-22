@@ -4,8 +4,7 @@
         "moduleResolution": "node",
         "outDir": "dist",
         "removeComments": true,
-        "declaration": true,
-        "declarationDir": "types"
+        "declaration": true
     },
     "exclude": [
         "node_modules",

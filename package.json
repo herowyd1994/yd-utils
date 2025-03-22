@@ -1,9 +1,9 @@
 {
-    "name": "@yd/utils",
+    "name": "yd_utils",
     "version": "1.0.1",
     "description": "## yd工具库",
     "main": "dist/index.js",
-    "types": "types/index.d.ts",
+    "types": "dist/index.d.ts",
     "scripts": {
         "build": "tsc"
     },

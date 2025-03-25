@@ -4,7 +4,7 @@ export const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, d
 export const getType = (target) => Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
 export const deepClone = (target, deps = new WeakMap()) => {
     const type = getType(target);
-    if (type !== 'array' || type !== 'object') {
+    if (type !== 'array' && type !== 'object') {
         return target;
     }
     if (deps.has(target)) {
@@ -45,7 +45,7 @@ export const serializeUrlParams = (url, symbol = '?') => url
 }, {});
 export const filterNone = (target, filter = ['/', '-', '.']) => {
     const type = getType(target);
-    if (type !== 'array' || type !== 'object') {
+    if (type !== 'array' && type !== 'object') {
         return filter.includes(target) ? null : target;
     }
     return Object.entries(target).reduce((obj, [key, value]) => {

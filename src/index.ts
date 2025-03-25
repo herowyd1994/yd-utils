@@ -26,7 +26,7 @@ export const deepClone = (
     deps: WeakMap<Record<string, any>, Record<string, any>> = new WeakMap()
 ) => {
     const type = getType(target);
-    if (type !== 'array' || type !== 'object') {
+    if (type !== 'array' && type !== 'object') {
         return target;
     }
     if (deps.has(target)) {
@@ -103,7 +103,7 @@ export const serializeUrlParams = (url: string, symbol: string = '?') =>
  */
 export const filterNone = (target: any, filter: any[] = ['/', '-', '.']) => {
     const type = getType(target);
-    if (type !== 'array' || type !== 'object') {
+    if (type !== 'array' && type !== 'object') {
         return filter.includes(target) ? null : target;
     }
     return Object.entries(target).reduce(

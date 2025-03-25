@@ -103,7 +103,7 @@ export const serializeUrlParams = (url: string, symbol: string = '?') =>
  */
 export const filterNone = (target: any, filter: any[] = ['/', '-', '.']) => {
     const type = getType(target);
-    if (type !== 'object' && type !== 'array') {
+    if (type !== 'array' || type !== 'object') {
         return filter.includes(target) ? null : target;
     }
     return Object.entries(target).reduce(

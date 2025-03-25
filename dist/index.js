@@ -44,7 +44,8 @@ export const serializeUrlParams = (url, symbol = '?') => url
     return obj;
 }, {});
 export const filterNone = (target, filter = ['/', '-', '.']) => {
-    if (typeof target !== 'object' || target == undefined) {
+    const type = getType(target);
+    if (typeof type !== 'object' && typeof type !== 'object') {
         return filter.includes(target) ? null : target;
     }
     return Object.entries(target).reduce((obj, [key, value]) => {

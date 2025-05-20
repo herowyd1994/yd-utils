@@ -298,3 +298,18 @@ export const getRandom = (max: number, min: number = 0) => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+/**
+ * 数字转字母
+ * @param {number} num
+ * @param {boolean} upperCase
+ * @returns {string}
+ */
+export const numberToLetterMulti = (num: number, upperCase: boolean = true) => {
+    let result = '';
+    while (num > 0) {
+        num--;
+        result = String.fromCharCode(upperCase ? 65 : 97 + (num % 26)) + result;
+        num = Math.floor(num / 26);
+    }
+    return result;
+};

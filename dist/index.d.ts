@@ -21,3 +21,4 @@ export declare const stripHtml: (html: string) => string;
 export declare const strParse: (target: string) => any;
 export declare const getCookie: () => {};
 export declare const getRandom: (max: number, min?: number) => number;
+export declare const numberToLetterMulti: (num: number, upperCase?: boolean) => string;

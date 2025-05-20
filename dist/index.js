@@ -14,7 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRandom = exports.getCookie = exports.strParse = exports.stripHtml = exports.toMillennials = exports.toDiscount = exports.toBoundary = exports.toFixed = exports.getDistance = exports.copyText = exports.colorToRGBA = exports.preFix = exports.transformCountDown = exports.getBJTime = exports.isNone = exports.filterNone = exports.serializeUrlParams = exports.transformUrlParams = exports.deepClone = exports.getType = exports.sleep = void 0;
+exports.numberToLetterMulti = exports.getRandom = exports.getCookie = exports.strParse = exports.stripHtml = exports.toMillennials = exports.toDiscount = exports.toBoundary = exports.toFixed = exports.getDistance = exports.copyText = exports.colorToRGBA = exports.preFix = exports.transformCountDown = exports.getBJTime = exports.isNone = exports.filterNone = exports.serializeUrlParams = exports.transformUrlParams = exports.deepClone = exports.getType = exports.sleep = void 0;
 __exportStar(require("./lib"), exports);
 __exportStar(require("./cloud"), exports);
 var sleep = function (delay) {
@@ -223,3 +223,14 @@ var getRandom = function (max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 exports.getRandom = getRandom;
+var numberToLetterMulti = function (num, upperCase) {
+    if (upperCase === void 0) { upperCase = true; }
+    var result = '';
+    while (num > 0) {
+        num--;
+        result = String.fromCharCode(upperCase ? 65 : 97 + (num % 26)) + result;
+        num = Math.floor(num / 26);
+    }
+    return result;
+};
+exports.numberToLetterMulti = numberToLetterMulti;

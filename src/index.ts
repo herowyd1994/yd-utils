@@ -287,3 +287,14 @@ export const getCookie = () =>
         .split(';')
         .map(item => item.split('='))
         .reduce((acc, [k, v]) => (acc[k.trim().replace('"', '')] = v) && acc, {});
+/**
+ * 获取随机数
+ * @param {number} max
+ * @param {number} min
+ * @returns {number}
+ */
+export const getRandom = (max: number, min: number = 0) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};

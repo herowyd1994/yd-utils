@@ -164,11 +164,11 @@ export const transformCountDown = (time: number, symbol: string = ':') => {
 };
 /**
  * 添加前缀
- * @param {number | string} target
- * @param {number | string} fix
- * @returns {string}
+ * @param {string | number} target
+ * @param {string | number} fix
+ * @returns {string | `${number}`}
  */
-export const preFix = (target: number | string, fix: number | string = 0) =>
+export const preFix = (target: string | number, fix: string | number = 0) =>
     parseFloat(`${target}`) < 10 ? `${fix}${target}` : `${target}`;
 /**
  * 16进制转rgba
@@ -300,16 +300,24 @@ export const getRandom = (max: number, min: number = 0) => {
 };
 /**
  * 数字转字母
- * @param {number} num
- * @param {boolean} upperCase
+ * @param {string | number} num
+ * @param {string} symbol
+ * @param {boolean} toUpper
  * @returns {string}
  */
-export const numberToLetterMulti = (num: number, upperCase: boolean = true) => {
-    let result = '';
-    while (num > 0) {
-        num--;
-        result = String.fromCharCode(upperCase ? 65 : 97 + (num % 26)) + result;
-        num = Math.floor(num / 26);
+export const numberToLetterMulti = (
+    num: string | number,
+    symbol: string = '、',
+    toUpper = true
+) => {
+    num = Number(num);
+    let str = '';
+    if (num > 26) {
+        str = `${Array(Math.trunc(num / 26))
+            .fill(toUpper ? 'Z' : 'z')
+            .join(symbol)}`;
+        num %= 26;
     }
-    return result;
+    num && (str += `${str ? symbol : ''}${String.fromCharCode((toUpper ? 64 : 96) + num)}`);
+    return str;
 };

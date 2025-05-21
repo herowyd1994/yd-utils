@@ -223,14 +223,18 @@ var getRandom = function (max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 exports.getRandom = getRandom;
-var numberToLetterMulti = function (num, upperCase) {
-    if (upperCase === void 0) { upperCase = true; }
-    var result = '';
-    while (num > 0) {
-        num--;
-        result = String.fromCharCode(upperCase ? 65 : 97 + (num % 26)) + result;
-        num = Math.floor(num / 26);
+var numberToLetterMulti = function (num, symbol, toUpper) {
+    if (symbol === void 0) { symbol = '、'; }
+    if (toUpper === void 0) { toUpper = true; }
+    num = Number(num);
+    var str = '';
+    if (num > 26) {
+        str = "".concat(Array(Math.trunc(num / 26))
+            .fill(toUpper ? 'Z' : 'z')
+            .join(symbol));
+        num %= 26;
     }
-    return result;
+    num && (str += "".concat(str ? symbol : '').concat(String.fromCharCode((toUpper ? 64 : 96) + num)));
+    return str;
 };
 exports.numberToLetterMulti = numberToLetterMulti;

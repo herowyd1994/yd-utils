@@ -305,11 +305,7 @@ export const getRandom = (max: number, min: number = 0) => {
  * @param {boolean} toUpper
  * @returns {string}
  */
-export const numberToLetterMulti = (
-    num: string | number,
-    symbol: string = '、',
-    toUpper = true
-) => {
+export const numberToLetterMulti = (num: string | number, symbol: string = '', toUpper = true) => {
     num = Number(num);
     let str = '';
     if (num > 26) {

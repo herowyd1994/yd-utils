@@ -224,7 +224,7 @@ var getRandom = function (max, min) {
 };
 exports.getRandom = getRandom;
 var numberToLetterMulti = function (num, symbol, toUpper) {
-    if (symbol === void 0) { symbol = '、'; }
+    if (symbol === void 0) { symbol = ''; }
     if (toUpper === void 0) { toUpper = true; }
     num = Number(num);
     var str = '';
